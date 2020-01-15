@@ -1,10 +1,25 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
+import React from "react";
+import ReactDOM from "react-dom";
 
-ReactDOM.render(<App />, document.getElementById('root'));
+import * as serviceWorker from "./core/service-worker/serviceWorker";
+import { GlobalStyles, theme } from "./styles";
+import { ThemeProvider } from "styled-components";
+import { Content, Title, Card, Grid } from "./components";
+
+ReactDOM.render(
+  <>
+    <ThemeProvider theme={theme}>
+      <GlobalStyles />
+      <Content data-cy="content">
+        {/* <Title data-cy="title">Yo</Title> */}
+        <Card data-cy="card">
+          <Grid />
+        </Card>
+      </Content>
+    </ThemeProvider>
+  </>,
+  document.getElementById("root")
+);
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
