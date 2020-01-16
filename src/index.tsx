@@ -4,7 +4,7 @@ import ReactDOM from "react-dom";
 import * as serviceWorker from "./core/service-worker/serviceWorker";
 import { GlobalStyles, theme } from "./styles";
 import { ThemeProvider } from "styled-components";
-import { Content, Title, Card, Grid } from "./components";
+import { Content, Card, Grid } from "./components";
 
 ReactDOM.render(
   <>
