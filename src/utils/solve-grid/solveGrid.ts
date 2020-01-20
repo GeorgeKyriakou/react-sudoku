@@ -30,40 +30,8 @@ export default function solveGrid(grid: GRID) {
           }
         }
       }
-      // global.complete = false;
       break;
     }
   }
   grid[row][col] = 0;
 }
-
-/*
-
-  let row = 0;
-  let col = 0;
-
-  for (let i = 0; i < 81; i++) {
-    row = Math.floor(i / 9);
-    col = i % 9;
-
-    if (grid[row][col] === 0) {
-      for (let n of numbers)
-        if (!isInRow(grid, row, n)) {
-          if (!isInCol(grid, col, n)) {
-            const square = square3x3(grid, row, col);
-            if (!isInBox(square, n)) {
-              grid[row][col] = n;
-              if (isGridComplete(grid)) {
-                global.complete = true;
-                break;
-              } else {
-                solveGrid(grid);
-              }
-            }
-          }
-        }
-      return false;
-    }
-  }
-  grid[row][col] = 0;
-*/

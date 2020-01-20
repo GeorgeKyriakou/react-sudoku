@@ -1,10 +1,11 @@
 import styled, { css } from "styled-components";
 interface Props {
   active?: boolean;
+  isUserInput: boolean;
 }
 
 export const Container = styled.div<Props>`
-  ${({ active, theme }) => css`
+  ${({ active, isUserInput, theme }) => css`
     align-items: center;
     background-color: ${active ? theme.colors.blue : theme.colors.white};
     border: solid 1px ${theme.colors.black};
@@ -13,8 +14,9 @@ export const Container = styled.div<Props>`
     flex-grow: 1;
     flex-shrink: 0;
     flex-basis: 0;
-    font-weight: bold;
+    font-weight: ${isUserInput ? "light" : "bold"};
     font-size: 20px;
+    color: ${isUserInput ? "green" : "black"};
     height: auto;
     justify-content: center;
     transition: ${theme.transition};

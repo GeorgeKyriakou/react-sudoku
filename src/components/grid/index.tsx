@@ -20,7 +20,11 @@ export const Grid: React.FC<Props> = () => {
   useEffect(() => create(), [create]);
 
   const state = useSelector<IReducer, State>(
-    ({ grid = [], selectedBlock }) => ({ grid, selectedBlock })
+    ({ grid = [], selectedBlock, checkGrid }) => ({
+      grid,
+      selectedBlock,
+      checkGrid
+    })
   );
 
   return (
@@ -39,6 +43,10 @@ export const Grid: React.FC<Props> = () => {
                     state.selectedBlock[0] === rowIndex &&
                     state.selectedBlock[1] === colIndex
                   }
+                  isUserInput={
+                    !!state.checkGrid &&
+                    state.checkGrid[rowIndex][colIndex] === 0
+                  }
                 ></Block>
               ))
             )}
@@ -50,9 +58,3 @@ export const Grid: React.FC<Props> = () => {
 };
 
 export default Grid;
-
-type ArrayElem<A> = A extends Array<infer Elem> ? Elem : never;
-
-export function elemT<T>(array: T): Array<ArrayElem<T>> {
-  return array as any;
-}

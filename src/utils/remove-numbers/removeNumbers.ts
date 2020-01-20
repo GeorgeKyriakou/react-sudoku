@@ -27,7 +27,6 @@ export function removeNumbers(grid: GRID, difficulty: number = 5): GRID {
 
     global.counter = 0;
     solveGrid(gridCopy);
-    console.log(global.counter);
 
     if (global.counter !== 1) {
       grid[row][col] = backup;
