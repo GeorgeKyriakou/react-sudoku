@@ -1,4 +1,6 @@
-export type GRID = [ROW, ROW, ROW, ROW, ROW, ROW, ROW, ROW, ROW];
+export type SELECTED_BLOCK = [number, number];
+
+export type GRID = [ROW, ROW, ROW, ROW, ROW, ROW, ROW, ROW, ROW] | [];
 
 export type N = 0 | NUMBERS;
 

@@ -1,36 +1,44 @@
-import React from "react";
+import React, { useEffect, Dispatch, useCallback } from "react";
 import { Row } from "./styles";
 import { Block } from "./block";
-import fillGrid from "utils/fill-grid";
-import { GRID } from "typings";
+import { NUMBERS } from "typings";
+import { useDispatch, useSelector } from "react-redux";
+import { AnyAction } from "redux";
+import { createGrid } from "store/actions";
+import { IReducer } from "store/config/interfaces";
+import { State } from "store/reducer";
 
 interface Props {}
-const sudoku: GRID = [
-  [0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0]
-];
-
-fillGrid(sudoku);
 
 export const Grid: React.FC<Props> = () => {
+  const dispatch = useDispatch<Dispatch<AnyAction>>();
+
+  const create = useCallback(() => {
+    dispatch(createGrid());
+  }, [dispatch]);
+
+  useEffect(() => create(), [create]);
+
+  const state = useSelector<IReducer, State>(
+    ({ grid = [], selectedBlock }) => ({ grid, selectedBlock })
+  );
+
   return (
     <div data-cy="grid-container">
       {React.Children.toArray(
-        sudoku.map((gridRow, rowIndex) => (
+        (state.grid as []).map((gridRow: Array<NUMBERS>, rowIndex: number) => (
           <Row data-cy="grid-row-container">
             {React.Children.toArray(
               gridRow.map((value, colIndex) => (
                 <Block
-                  colIndex={colIndex}
                   rowIndex={rowIndex}
+                  colIndex={colIndex}
                   value={value}
+                  isSelected={
+                    !!state.selectedBlock &&
+                    state.selectedBlock[0] === rowIndex &&
+                    state.selectedBlock[1] === colIndex
+                  }
                 ></Block>
               ))
             )}
@@ -42,3 +50,9 @@ export const Grid: React.FC<Props> = () => {
 };
 
 export default Grid;
+
+type ArrayElem<A> = A extends Array<infer Elem> ? Elem : never;
+
+export function elemT<T>(array: T): Array<ArrayElem<T>> {
+  return array as any;
+}

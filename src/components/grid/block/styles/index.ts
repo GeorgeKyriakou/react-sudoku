@@ -1,9 +1,12 @@
 import styled, { css } from "styled-components";
+interface Props {
+  active?: boolean;
+}
 
-export const Container = styled.div`
-  ${({ theme }) => css`
+export const Container = styled.div<Props>`
+  ${({ active, theme }) => css`
     align-items: center;
-    background-color: ${theme.colors.white};
+    background-color: ${active ? theme.colors.blue : theme.colors.white};
     border: solid 1px ${theme.colors.black};
     cursor: pointer;
     display: flex;

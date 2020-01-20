@@ -1,5 +1,11 @@
-import { GRID, NUMBERS, SQAURE } from "typings";
-
+import { GRID, NUMBERS } from "typings";
+import {
+  isInRow,
+  isInCol,
+  square3x3,
+  isInBox,
+  isGridComplete
+} from "../helpers";
 let numbers: NUMBERS[] = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
 /**
@@ -41,73 +47,16 @@ function shuffleArray(array: any) {
     t,
     i;
 
-  // While there remain elements to shuffle…
   while (m) {
-    // Pick a remaining element…
+    // swapped elements will not be touched any longer (thus making the shuffling in place)
     i = Math.floor(Math.random() * m--);
 
-    // And swap it with the current element.
-    t = array[m];
-    array[m] = array[i];
-    array[i] = t;
+    t = array[m]; //save previous value
+    array[m] = array[i]; // swap it with another random element
+    array[i] = t; // give that element the previous value
   }
 
   return array;
 }
 
 export default fillGrid;
-
-function isInRow(grid: any, row: any, value: NUMBERS): boolean {
-  return grid[row].includes(value);
-}
-
-function isInCol(grid: any, col: any, value: NUMBERS): boolean {
-  for (let i = 0; i < 9; i++) {
-    if (value === grid[i][col]) return true;
-  }
-  return false;
-}
-
-function isInBox(square: SQAURE, value: NUMBERS): boolean {
-  return [...square[0], ...square[1], ...square[2]].includes(value);
-}
-
-function square3x3(grid: any, row: number, col: number): SQAURE {
-  let rowStartIndex = 0;
-  let colStartIndex = 0;
-  if (row < 3) {
-    if (col >= 3) {
-      colStartIndex = col < 6 ? 3 : 6;
-    }
-  }
-  if (row >= 3 && row < 6) {
-    rowStartIndex = 3;
-    if (col > 2) {
-      colStartIndex = col < 6 ? 3 : 6;
-    }
-  } else if (row >= 6) {
-    rowStartIndex = 6;
-    if (col > 2) {
-      colStartIndex = col < 6 ? 3 : 6;
-    }
-  }
-
-  let workingSquare: number[][] = [];
-  for (let i = rowStartIndex; i <= rowStartIndex + 2; i++) {
-    let workingSquareRow: number[] = [];
-    for (let j = colStartIndex; j <= colStartIndex + 2; j++) {
-      workingSquareRow.push(grid[i][j]);
-    }
-    workingSquare.push(workingSquareRow);
-  }
-  return workingSquare as SQAURE;
-}
-
-export function isGridComplete(grid: GRID): boolean {
-  for (let i = 0; i < 9; i++) {
-    for (let j = 0; j < 9; j++) {
-      if (grid[i][j] === 0) return false;
-    }
-  }
-  return true;
-}
