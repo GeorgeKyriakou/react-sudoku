@@ -18,3 +18,8 @@ export const fillBlock = (
   value,
   type: types.FILL_BLOCK
 });
+
+export const clearBlock = (blockIndexes: SELECTED_BLOCK): AnyAction => ({
+  blockIndexes,
+  type: types.CLEAR_BLOCK
+});

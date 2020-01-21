@@ -70,7 +70,21 @@ const reducer = (state = initialState, action: AnyAction): State => {
       }
       return state;
     }
+    case types.CLEAR_BLOCK: {
+      const rowInd = action.blockIndexes[0];
+      const colInd = action.blockIndexes[1];
 
+      if (
+        state.grid &&
+        state.solvedGrid &&
+        state.checkGrid &&
+        state.checkGrid[rowInd][colInd] === 0
+      ) {
+        state.grid[rowInd][colInd] = 0;
+        return { ...state, grid: [...state.grid] as GRID };
+      }
+      return state;
+    }
     default:
       return state;
   }

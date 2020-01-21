@@ -2,7 +2,7 @@ import React, { Dispatch } from "react";
 import { Container } from "./styles";
 import { useDispatch } from "react-redux";
 import { AnyAction } from "redux";
-import { select, fillBlock } from "store/actions";
+import { select, fillBlock, clearBlock } from "store/actions";
 import { SELECTED_BLOCK, NUMBERS } from "typings";
 interface Props {
   colIndex: number;
@@ -28,9 +28,15 @@ export const Block: React.FC<Props> = ({
 
   const handleKeyPress = (e: React.KeyboardEvent) => {
     e.preventDefault();
-    if (e.key.charCodeAt(0) > 48 && e.key.charCodeAt(0) < 58) {
+
+    //  numbers from 1-9 OR backspace
+    if ((e.keyCode > 48 && e.keyCode < 58) || e.keyCode === 8) {
       const blockIndexes = [rowIndex, colIndex] as SELECTED_BLOCK;
-      dispatch(fillBlock(+e.key as NUMBERS, blockIndexes));
+      if (e.keyCode === 8) {
+        dispatch(clearBlock(blockIndexes));
+      } else {
+        dispatch(fillBlock(+e.key as NUMBERS, blockIndexes));
+      }
     }
   };
 
