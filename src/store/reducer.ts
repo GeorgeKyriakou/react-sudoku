@@ -34,7 +34,7 @@ const reducer = (state = initialState, action: AnyAction): State => {
         gridRow.slice()
       ) as GRID;
 
-      removeNumbers(grid);
+      removeNumbers(grid, 1);
       const checkGrid = (grid as Array<GRID>).map(gridRow =>
         gridRow.slice()
       ) as GRID;

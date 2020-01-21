@@ -29,7 +29,9 @@ export const Container = styled.div<Props>`
     }
 
     &:hover {
-      background-color: ${theme.colors.lightblue};
+      background-color: ${isUserInput
+        ? theme.colors.lightblue
+        : theme.colors.white};
     }
   `}
 `;

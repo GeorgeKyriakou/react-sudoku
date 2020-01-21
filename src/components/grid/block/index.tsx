@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import { AnyAction } from "redux";
 import { select, fillBlock, clearBlock } from "store/actions";
 import { SELECTED_BLOCK, NUMBERS } from "typings";
+
 interface Props {
   colIndex: number;
   rowIndex: number;
@@ -45,10 +46,10 @@ export const Block: React.FC<Props> = ({
       <Container
         tabIndex={0}
         onKeyUp={handleKeyPress}
-        active={isSelected}
+        active={isSelected && isUserInput}
         isUserInput={isUserInput}
         data-cy={`block-${rowIndex}${colIndex}`}
-        onClick={() => handleOnClick(rowIndex, colIndex)}
+        onClick={() => (isUserInput ? handleOnClick(rowIndex, colIndex) : null)}
       >
         {!!value && value}
       </Container>
