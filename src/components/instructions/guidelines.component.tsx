@@ -1,5 +1,5 @@
 import React from "react";
-import { Instruction, Rule } from "./guidelines.style";
+import { Instruction, Rule } from "./guidelines.styled";
 
 interface Props {}
 

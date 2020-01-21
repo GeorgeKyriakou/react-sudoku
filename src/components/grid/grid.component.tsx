@@ -1,6 +1,6 @@
 import React, { useEffect, Dispatch, useCallback } from "react";
-import { Row } from "./styles";
-import { Block } from "./block";
+import { Row } from "./grid.styled";
+import { Block } from "./block/block.component";
 import { NUMBERS } from "typings";
 import { useDispatch, useSelector } from "react-redux";
 import { AnyAction } from "redux";

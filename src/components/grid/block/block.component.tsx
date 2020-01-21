@@ -1,5 +1,5 @@
 import React, { Dispatch } from "react";
-import { Container } from "./styles";
+import { Container } from "./block.styled";
 import { useDispatch } from "react-redux";
 import { AnyAction } from "redux";
 import { select, fillBlock, clearBlock } from "store/actions";
@@ -46,7 +46,7 @@ export const Block: React.FC<Props> = ({
       <Container
         tabIndex={0}
         onKeyUp={handleKeyPress}
-        active={isSelected && isUserInput}
+        active={isSelected}
         isUserInput={isUserInput}
         data-cy={`block-${rowIndex}${colIndex}`}
         onClick={() => (isUserInput ? handleOnClick(rowIndex, colIndex) : null)}

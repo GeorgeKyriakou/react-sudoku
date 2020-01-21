@@ -1,3 +1,3 @@
-export * from "./content";
-export * from "./title";
-export * from "./card";
+export * from "./content/content.styled";
+export * from "./title/title.styled";
+export * from "./card/card.styled";
